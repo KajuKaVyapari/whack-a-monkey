@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/hammer.png" type="Texture" id=1]
+[ext_resource path="res://assets/tree_solo_final.png" type="Texture" id=2]
+[ext_resource path="res://assets/bg_solo_final.png" type="Texture" id=3]
+
+[node name="world" type="Node2D"]
+scale = Vector2( 0.5, 0.5 )
+
+[node name="background" type="TextureRect" parent="."]
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="monkeys" type="Node2D" parent="."]
+
+[node name="tree" type="Sprite" parent="."]
+position = Vector2( 540, 960 )
+texture = ExtResource( 2 )
+
+[node name="hammer" type="Sprite" parent="."]
+position = Vector2( 557.751, 1537.61 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
