@@ -22,8 +22,10 @@ position = Vector2( 540, 960 )
 texture = ExtResource( 2 )
 
 [node name="hammer" type="Sprite" parent="."]
-position = Vector2( 557.751, 1537.61 )
+position = Vector2( 580.2, 1521.9 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
+flip_h = true
 
 [node name="tween" type="Tween" parent="hammer"]
+[connection signal="tween_completed" from="hammer/tween" to="." method="_on_tween_completed"]
