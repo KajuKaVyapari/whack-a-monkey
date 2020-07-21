@@ -31,12 +31,19 @@ var monkeys_list = []
 
 var i = 0
 var score = 0
+var score_text
+var highscore_text
 
 
 func _ready():
 	
 	randomize()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
+	$ui/score_label.text = "Score: "
+	score_text = $ui/score_label.text
+	$ui/highscore_label.text = "High Score: "
+	highscore_text = $ui/highscore_label.text
 
 
 func _physics_process(delta):
@@ -71,7 +78,7 @@ func _on_tween_completed(object, key):
 
 func _on_monkey_detector_area_entered(area):
 	area.get_parent().queue_free()
-	score += 1
+	increase_score()
 	print(score)
 
 
@@ -91,4 +98,9 @@ func _on_spawn_timer_timeout():
 
 func decrease_score():
 	score = max(score - 1, 0)
-	print(score)
+	$ui/score_label.text = score_text + str(score)
+
+
+func increase_score():
+	score += 1
+	$ui/score_label.text = score_text + str(score)
