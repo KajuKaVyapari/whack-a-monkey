@@ -8,14 +8,29 @@ onready var Monkey = load("res://scenes/monkey.tscn")
 
 
 var possible_spawns = [
-	make_point(Vector2(100, 250), 90, Vector2.RIGHT),
-	make_point(Vector2(250, 100), -90, Vector2.LEFT),
+	make_point(Vector2(505, 1315), 60, Vector2.RIGHT),
+	make_point(Vector2(485, 1315), -60, Vector2.LEFT),
+	make_point(Vector2(525, 1120), 130, (Vector2.RIGHT + Vector2.DOWN).normalized()),
+	make_point(Vector2(420, 1125), -140, (Vector2.LEFT + Vector2.DOWN).normalized()),
+	make_point(Vector2(335, 950), -80, Vector2.LEFT),
+	make_point(Vector2(220, 690), -15, Vector2.UP),
+	make_point(Vector2(230, 760), -160, Vector2.DOWN),
+	make_point(Vector2(312, 600), -45, (Vector2.LEFT + Vector2.UP).normalized()),
+	make_point(Vector2(415, 775), -16, Vector2.UP),
+	make_point(Vector2(490, 600), -40, (Vector2.LEFT + Vector2.UP).normalized()),
+	make_point(Vector2(575, 640), 45, (Vector2.RIGHT + Vector2.UP).normalized()),
+	make_point(Vector2(680, 755), -12, Vector2.UP),
+	make_point(Vector2(640, 910), 135, (Vector2.RIGHT + Vector2.DOWN).normalized()),
+	make_point(Vector2(515, 1115), 100, Vector2.RIGHT),
+	make_point(Vector2(515, 1515), 64, Vector2.RIGHT),
+	make_point(Vector2(480, 1515), -64, Vector2.LEFT)
 ]
 
 var state = "move"
 var monkeys_list = []
 
 var i = 0
+var score = 0
 
 
 func _ready():
@@ -33,6 +48,8 @@ func _physics_process(delta):
 				state = "wait"
 				rotate_hammer()
 			hammer.global_position = get_global_mouse_position()
+	
+	score = max(score, 0)
 
 
 func rotate_hammer():
@@ -54,6 +71,8 @@ func _on_tween_completed(object, key):
 
 func _on_monkey_detector_area_entered(area):
 	area.get_parent().queue_free()
+	score += 1
+	print(score)
 
 
 func make_point(spawn_point, rot_deg, dir):
@@ -68,3 +87,8 @@ func _on_spawn_timer_timeout():
 	monkeys_list[i].global_position = info["spawn_point"]
 	monkeys.add_child(monkeys_list[i])
 	i += 1
+
+
+func decrease_score():
+	score = max(score - 1, 0)
+	print(score)

@@ -25,4 +25,5 @@ func _on_monkey_tween_completed(object, key):
 		tween.interpolate_property(self, "position", fn_pos, or_pos, 1, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
 		tween.start()
 	else:
+		get_parent().get_parent().decrease_score()
 		queue_free()

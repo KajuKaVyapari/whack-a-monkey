@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/hammer.png" type="Texture" id=1]
 [ext_resource path="res://assets/tree_solo_final.png" type="Texture" id=2]
 [ext_resource path="res://assets/bg_solo_final.png" type="Texture" id=3]
 [ext_resource path="res://scripts/world.gd" type="Script" id=4]
+[ext_resource path="res://assets/monkey-final.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 31.2908
@@ -20,6 +21,12 @@ __meta__ = {
 }
 
 [node name="monkeys" type="Node2D" parent="."]
+
+[node name="monkey-final" type="Sprite" parent="monkeys"]
+position = Vector2( 505.656, 1531.47 )
+rotation = 1.11705
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 5 )
 
 [node name="tree" type="Sprite" parent="."]
 position = Vector2( 540, 960 )
