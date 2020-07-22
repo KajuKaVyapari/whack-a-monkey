@@ -64,13 +64,13 @@ func _physics_process(delta):
 
 
 func rotate_hammer():
-	hammer_tween.interpolate_property(hammer, "rotation_degrees", 0, -45, .5, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+	hammer_tween.interpolate_property(hammer, "rotation_degrees", 0, -45, .3, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	hammer_tween.start()
 
 
 func _on_tween_completed(object, key):
 	if object.rotation_degrees == -45:
-		hammer_tween.interpolate_property(hammer, "rotation_degrees", -45, 0, .5, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+		hammer_tween.interpolate_property(hammer, "rotation_degrees", -45, 0, .3, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		hammer_tween.start()
 	else:
 		get_viewport().warp_mouse(hammer.global_position)
@@ -83,7 +83,6 @@ func _on_tween_completed(object, key):
 func _on_monkey_detector_area_entered(area):
 	area.get_parent().queue_free()
 	increase_score()
-	print(score)
 
 
 func make_point(spawn_point, rot_deg, dir):
@@ -101,8 +100,11 @@ func _on_spawn_timer_timeout():
 
 
 func decrease_score():
-	score = max(score - 1, 0)
-	$ui/score_label.text = score_text + str(score)
+	if not score == 0:
+		score -= 1
+		$ui/score_label.text = score_text + str(score)
+	else:
+		lose_game()
 
 
 func increase_score():
@@ -148,3 +150,7 @@ func load_data(file, empty = null, path = "res"):
 		return data
 	else:
 		return empty
+
+
+func lose_game():
+	print("YOU LOST NOOB")
