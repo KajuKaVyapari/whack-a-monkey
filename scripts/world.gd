@@ -60,7 +60,7 @@ func _physics_process(delta):
 
 
 func _input(event):
-	if event is InputEventScreenTouch or:
+	if event is InputEventScreenTouch:
 			hammer.get_node("monkey_detector/collider").disabled = false
 			state = "wait"
 			rotate_hammer()
