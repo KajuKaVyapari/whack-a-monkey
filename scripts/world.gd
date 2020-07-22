@@ -56,13 +56,14 @@ func _physics_process(delta):
 	
 	match state:
 		"move":
-			if Input.is_action_just_pressed("attack"):
-				hammer.get_node("monkey_detector/collider").disabled = false
-				state = "wait"
-				rotate_hammer()
 			hammer.global_position = get_global_mouse_position()
-	
-	score = max(score, 0)
+
+
+func _input(event):
+	if event is InputEventScreenTouch or:
+			hammer.get_node("monkey_detector/collider").disabled = false
+			state = "wait"
+			rotate_hammer()
 
 
 func rotate_hammer():
