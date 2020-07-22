@@ -35,6 +35,8 @@ var highscore = 0
 var score_text
 var highscore_text
 
+var miss_streak = 5
+
 
 func _ready():
 	
@@ -64,13 +66,13 @@ func _physics_process(delta):
 
 
 func rotate_hammer():
-	hammer_tween.interpolate_property(hammer, "rotation_degrees", 0, -45, .3, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	hammer_tween.interpolate_property(hammer, "rotation_degrees", 0, -45, .2, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	hammer_tween.start()
 
 
 func _on_tween_completed(object, key):
 	if object.rotation_degrees == -45:
-		hammer_tween.interpolate_property(hammer, "rotation_degrees", -45, 0, .3, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		hammer_tween.interpolate_property(hammer, "rotation_degrees", -45, 0, .2, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		hammer_tween.start()
 	else:
 		get_viewport().warp_mouse(hammer.global_position)
@@ -100,20 +102,25 @@ func _on_spawn_timer_timeout():
 
 
 func decrease_score():
-	if not score == 0:
-		score -= 1
-		$ui/score_label.text = score_text + str(score)
-	else:
-		lose_game()
+		miss_streak -= 1
+		$ui/hearts.rect_size.x = 256 * miss_streak
+		if not score <= 0 and not miss_streak <= 0:
+			score -= 1
+			$ui/score_label.text = score_text + str(score)
+		else:
+			$ui/score_label.text = score_text + str(score)
+			lose_game()
 
 
 func increase_score():
 	score += 1
+	miss_streak = 5
 	if highscore < score:
 		highscore = score
 		save_data(highscore, 'highscore')
 	$ui/highscore_label.text = highscore_text + str(highscore)
 	$ui/score_label.text = score_text + str(score)
+	$ui/hearts.rect_size.x = 256 * miss_streak
 
 
 #Saving Highscore
