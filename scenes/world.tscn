@@ -13,12 +13,12 @@
 radius = 31.2908
 height = 47.5957
 
-[sub_resource type="StyleBoxTexture" id=3]
+[sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 7 )
 region_rect = Rect2( 0, 0, 400, 126 )
 margin_left = 10.0
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 100
 font_data = ExtResource( 6 )
 
@@ -82,8 +82,8 @@ anchor_right = 1.0
 margin_left = 640.0
 margin_right = 1040.0
 margin_bottom = 126.0
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 0.968627, 0.968627, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 4
@@ -99,7 +99,7 @@ margin_left = -40.0
 margin_right = 560.0
 margin_bottom = 126.0
 custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 4

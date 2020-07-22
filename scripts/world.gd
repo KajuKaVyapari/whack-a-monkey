@@ -30,7 +30,8 @@ var state = "move"
 var monkeys_list = []
 
 var i = 0
-var score = 0
+var score = -1
+var highscore = 0
 var score_text
 var highscore_text
 
@@ -44,7 +45,10 @@ func _ready():
 	score_text = $ui/score_label.text
 	$ui/highscore_label.text = "High Score: "
 	highscore_text = $ui/highscore_label.text
-
+	
+	if load_data('highscore'):
+		highscore = (load_data('highscore'))
+	increase_score()
 
 func _physics_process(delta):
 	
@@ -103,4 +107,44 @@ func decrease_score():
 
 func increase_score():
 	score += 1
+	if highscore < score:
+		highscore = score
+		save_data(highscore, 'highscore')
+	$ui/highscore_label.text = highscore_text + str(highscore)
 	$ui/score_label.text = score_text + str(score)
+
+
+#Saving Highscore
+func save_data(data, file, path = "res"):
+
+	# Create and open file.
+	var SAVE_PATH = path+'://'+file+'.json'
+	var save_file = File.new()
+	save_file.open(SAVE_PATH, File.WRITE)
+
+	# Convert data to a useable string-format.
+	save_file.store_line(to_json(data))
+
+	# Close file.
+	save_file.close()
+
+
+func load_data(file, empty = null, path = "res"):
+	# Create file
+	var SAVE_PATH = path+"://"+file+".json"
+	var save_file = File.new()
+	
+	if save_file.file_exists(SAVE_PATH):
+		# Open your file
+		save_file.open(SAVE_PATH, File.READ)
+		
+		# Save data from file.
+		var data = parse_json(save_file.get_as_text())
+		
+		# Close file 
+		save_file.close()
+		
+		# Return data
+		return data
+	else:
+		return empty
