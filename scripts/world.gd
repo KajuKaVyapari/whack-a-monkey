@@ -56,24 +56,26 @@ func _physics_process(delta):
 	
 	match state:
 		"move":
+			if Input.is_action_just_pressed("attack"):
+				hammer.get_node("monkey_detector/collider").disabled = false
+				state = "wait"
+				rotate_hammer()
 			hammer.global_position = get_global_mouse_position()
 
 
 func _input(event):
 	if event is InputEventScreenTouch:
-			hammer.get_node("monkey_detector/collider").disabled = false
-			state = "wait"
-			rotate_hammer()
+			pass
 
 
 func rotate_hammer():
-	hammer_tween.interpolate_property(hammer, "rotation_degrees", 0, -45, .2, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	hammer_tween.interpolate_property(hammer, "rotation_degrees", 0, -45, .2, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
 	hammer_tween.start()
 
 
 func _on_tween_completed(object, key):
 	if object.rotation_degrees == -45:
-		hammer_tween.interpolate_property(hammer, "rotation_degrees", -45, 0, .2, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		hammer_tween.interpolate_property(hammer, "rotation_degrees", -45, 0, .2, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
 		hammer_tween.start()
 	else:
 		get_viewport().warp_mouse(hammer.global_position)
@@ -115,7 +117,7 @@ func decrease_score():
 
 func increase_score():
 	score += 1
-	miss_streak = 5
+	miss_streak = min (miss_streak + 1, 5)
 	if highscore < score:
 		highscore = score
 		save_data(highscore, 'highscore')

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/hammer.png" type="Texture" id=1]
 [ext_resource path="res://assets/tree_solo_final.png" type="Texture" id=2]
@@ -9,10 +9,11 @@
 [ext_resource path="res://assets/ui/score_label.png" type="Texture" id=7]
 [ext_resource path="res://assets/ui/highscore_label.png" type="Texture" id=8]
 [ext_resource path="res://assets/ui/heart.png" type="Texture" id=9]
+[ext_resource path="res://scripts/ui.gd" type="Script" id=10]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 31.2908
-height = 47.5957
+radius = 53.9414
+height = 318.209
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 7 )
@@ -29,6 +30,7 @@ region_rect = Rect2( 0, 0, 600, 126 )
 margin_left = 4.0
 
 [node name="world" type="Node2D"]
+scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 4 )
 
 [node name="background" type="TextureRect" parent="."]
@@ -61,7 +63,8 @@ flip_h = true
 position = Vector2( -156.975, -168.867 )
 
 [node name="collider" type="CollisionShape2D" parent="hammer/monkey_detector"]
-position = Vector2( 8.32446, -4.75684 )
+position = Vector2( 158.558, -5.19678 )
+rotation = 1.5708
 shape = SubResource( 1 )
 disabled = true
 
@@ -75,6 +78,7 @@ autostart = true
 [node name="ui" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -125,7 +129,20 @@ stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="buttons" type="Node2D" parent="ui"]
+position = Vector2( 540, 1720 )
+
+[node name="exit_button" type="TextureButton" parent="ui/buttons"]
+margin_left = -534.0
+margin_top = 52.0
+margin_right = -494.0
+margin_bottom = 92.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="tween_completed" from="hammer/tween" to="." method="_on_tween_completed"]
 [connection signal="area_entered" from="hammer/monkey_detector" to="." method="_on_monkey_detector_area_entered"]
 [connection signal="timeout" from="spawn_timer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="surprise_timer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="pressed" from="ui/buttons/exit_button" to="ui" method="_on_exit_button_pressed"]
