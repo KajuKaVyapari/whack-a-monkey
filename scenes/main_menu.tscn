@@ -1,16 +1,40 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/bg_solo_final.png" type="Texture" id=1]
 [ext_resource path="res://assets/tree_solo_final.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/Mansalva-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scenes/exit_button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/ui.gd" type="Script" id=5]
+[ext_resource path="res://scenes/play_button.tscn" type="PackedScene" id=6]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.411765, 0.901961, 1, 1 )
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color( 0, 0, 1, 1 )
+border_blend = true
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+expand_margin_left = 50.0
+expand_margin_right = 50.0
+expand_margin_top = 50.0
+expand_margin_bottom = 50.0
+shadow_color = Color( 0, 0, 0.588235, 1 )
+shadow_offset = Vector2( 50, 0 )
+
+[sub_resource type="DynamicFont" id=2]
 size = 200
 font_data = ExtResource( 3 )
 
 [node name="main_menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -29,15 +53,30 @@ __meta__ = {
 }
 
 [node name="title" type="Label" parent="."]
-margin_left = 186.163
-margin_top = 135.715
-margin_right = 947.163
-margin_bottom = 795.715
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.0196078, 0.0156863, 0.360784, 1 )
+margin_left = 140.0
+margin_top = 200.0
+margin_right = 941.0
+margin_bottom = 900.0
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 1, 1 )
 text = "Whack
  - A - 
 Monkey !"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="exit_button" parent="." instance=ExtResource( 4 )]
+margin_left = 412.0
+margin_top = 1520.0
+margin_right = 924.0
+margin_bottom = 2032.0
+
+[node name="play_button" parent="." instance=ExtResource( 6 )]
+margin_left = 412.0
+margin_top = 1170.0
+margin_right = 924.0
+margin_bottom = 1682.0
+[connection signal="pressed" from="exit_button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="play_button" to="." method="_on_play_button_pressed"]

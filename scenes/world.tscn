@@ -10,9 +10,9 @@
 [ext_resource path="res://assets/ui/highscore_label.png" type="Texture" id=8]
 [ext_resource path="res://assets/ui/heart.png" type="Texture" id=9]
 [ext_resource path="res://scripts/ui.gd" type="Script" id=10]
-[ext_resource path="res://assets/ui/exit_button.png" type="Texture" id=11]
-[ext_resource path="res://assets/ui/pause_button.png" type="Texture" id=12]
-[ext_resource path="res://assets/ui/menu_button.png" type="Texture" id=13]
+[ext_resource path="res://scenes/exit_button.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/menu_button.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/pause_button.tscn" type="PackedScene" id=13]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 53.9414
@@ -139,41 +139,15 @@ __meta__ = {
 pause_mode = 2
 position = Vector2( 540, 1780 )
 
-[node name="exit_button" type="TextureButton" parent="ui/buttons"]
-margin_left = -508.0
-margin_top = -128.0
-margin_right = 3.99997
-margin_bottom = 384.0
-rect_scale = Vector2( 0.5, 0.5 )
-texture_normal = ExtResource( 11 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="exit_button" parent="ui/buttons" instance=ExtResource( 11 )]
 
-[node name="pause_button" type="TextureButton" parent="ui/buttons"]
-margin_left = -128.0
-margin_top = -128.0
-margin_right = 384.0
-margin_bottom = 384.0
-rect_scale = Vector2( 0.5, 0.5 )
-texture_normal = ExtResource( 12 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="pause_button" parent="ui/buttons" instance=ExtResource( 13 )]
 
-[node name="menu_button" type="TextureButton" parent="ui/buttons"]
-margin_left = 252.0
-margin_top = -128.0
-margin_right = 764.0
-margin_bottom = 384.0
-rect_scale = Vector2( 0.5, 0.5 )
-texture_normal = ExtResource( 13 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="menu_button" parent="ui/buttons" instance=ExtResource( 12 )]
 [connection signal="tween_completed" from="hammer/tween" to="." method="_on_tween_completed"]
 [connection signal="area_entered" from="hammer/monkey_detector" to="." method="_on_monkey_detector_area_entered"]
 [connection signal="timeout" from="spawn_timer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="surprise_timer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="pressed" from="ui/buttons/exit_button" to="ui" method="_on_exit_button_pressed"]
 [connection signal="pressed" from="ui/buttons/pause_button" to="ui" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="ui/buttons/menu_button" to="ui" method="_on_menu_button_pressed"]
