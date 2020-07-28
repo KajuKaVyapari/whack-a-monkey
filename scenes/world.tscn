@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/hammer.png" type="Texture" id=1]
 [ext_resource path="res://assets/tree_solo_final.png" type="Texture" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://assets/ui/highscore_label.png" type="Texture" id=8]
 [ext_resource path="res://assets/ui/heart.png" type="Texture" id=9]
 [ext_resource path="res://scripts/ui.gd" type="Script" id=10]
+[ext_resource path="res://assets/ui/exit_button.png" type="Texture" id=11]
+[ext_resource path="res://assets/ui/pause_button.png" type="Texture" id=12]
+[ext_resource path="res://assets/ui/menu_button.png" type="Texture" id=13]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 53.9414
@@ -34,6 +37,8 @@ scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 4 )
 
 [node name="background" type="TextureRect" parent="."]
+margin_right = 1080.0
+margin_bottom = 1920.0
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -131,13 +136,38 @@ __meta__ = {
 }
 
 [node name="buttons" type="Node2D" parent="ui"]
-position = Vector2( 540, 1720 )
+pause_mode = 2
+position = Vector2( 540, 1780 )
 
 [node name="exit_button" type="TextureButton" parent="ui/buttons"]
-margin_left = -534.0
-margin_top = 52.0
-margin_right = -494.0
-margin_bottom = 92.0
+margin_left = -508.0
+margin_top = -128.0
+margin_right = 3.99997
+margin_bottom = 384.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pause_button" type="TextureButton" parent="ui/buttons"]
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 384.0
+margin_bottom = 384.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="menu_button" type="TextureButton" parent="ui/buttons"]
+margin_left = 252.0
+margin_top = -128.0
+margin_right = 764.0
+margin_bottom = 384.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -146,3 +176,4 @@ __meta__ = {
 [connection signal="timeout" from="spawn_timer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="surprise_timer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="pressed" from="ui/buttons/exit_button" to="ui" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="ui/buttons/pause_button" to="ui" method="_on_pause_button_pressed"]
