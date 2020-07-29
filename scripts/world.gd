@@ -48,8 +48,10 @@ func _ready():
 	$ui/highscore_label.text = "High Score: "
 	highscore_text = $ui/highscore_label.text
 	
-	if load_data('highscore'):
+	if load_data('highscore') and global.highscore == null:
 		global.highscore = (load_data('highscore'))
+	elif global.highscore == null:
+		global.highscore = 0
 	increase_score()
 
 
@@ -117,6 +119,7 @@ func decrease_score():
 			$ui/score_label.text = score_text + str(global.score)
 		else:
 			$ui/score_label.text = score_text + str(global.score)
+		if miss_streak <= 0:
 			lose_game()
 
 

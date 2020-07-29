@@ -72,9 +72,9 @@ __meta__ = {
 }
 
 [node name="score" type="Label" parent="."]
-margin_left = 20.0
+margin_left = 540.0
 margin_top = 770.0
-margin_right = 520.0
+margin_right = 1040.0
 margin_bottom = 932.0
 custom_styles/normal = SubResource( 1 )
 custom_fonts/font = SubResource( 2 )
@@ -84,9 +84,9 @@ __meta__ = {
 }
 
 [node name="highscore" type="Label" parent="."]
-margin_left = 540.0
+margin_left = 20.0
 margin_top = 770.0
-margin_right = 1040.0
+margin_right = 520.0
 margin_bottom = 932.0
 custom_styles/normal = SubResource( 1 )
 custom_fonts/font = SubResource( 2 )

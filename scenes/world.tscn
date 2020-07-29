@@ -76,10 +76,6 @@ disabled = true
 [node name="spawn_timer" type="Timer" parent="."]
 autostart = true
 
-[node name="surprise_timer" type="Timer" parent="."]
-wait_time = 14.5
-autostart = true
-
 [node name="ui" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -150,7 +146,6 @@ stream = ExtResource( 14 )
 [connection signal="tween_completed" from="hammer/tween" to="." method="_on_tween_completed"]
 [connection signal="area_entered" from="hammer/monkey_detector" to="." method="_on_monkey_detector_area_entered"]
 [connection signal="timeout" from="spawn_timer" to="." method="_on_spawn_timer_timeout"]
-[connection signal="timeout" from="surprise_timer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="pressed" from="ui/buttons/exit_button" to="ui" method="_on_exit_button_pressed"]
 [connection signal="pressed" from="ui/buttons/pause_button" to="ui" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="ui/buttons/menu_button" to="ui" method="_on_menu_button_pressed"]
