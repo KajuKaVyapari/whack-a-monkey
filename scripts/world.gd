@@ -30,8 +30,6 @@ var state = "move"
 var monkeys_list = []
 
 var i = 0
-var score = -1
-var highscore = 0
 var score_text
 var highscore_text
 
@@ -49,7 +47,7 @@ func _ready():
 	highscore_text = $ui/highscore_label.text
 	
 	if load_data('highscore'):
-		highscore = (load_data('highscore'))
+		global.highscore = (load_data('highscore'))
 	increase_score()
 
 func _physics_process(delta):
@@ -107,22 +105,22 @@ func _on_spawn_timer_timeout():
 func decrease_score():
 		miss_streak -= 1
 		$ui/hearts.rect_size.x = 256 * miss_streak
-		if not score <= 0 and not miss_streak <= 0:
-			score -= 1
-			$ui/score_label.text = score_text + str(score)
+		if not global.score <= 0 and not miss_streak <= 0:
+			global.score -= 1
+			$ui/score_label.text = score_text + str(global.score)
 		else:
-			$ui/score_label.text = score_text + str(score)
+			$ui/score_label.text = score_text + str(global.score)
 			lose_game()
 
 
 func increase_score():
-	score += 1
+	global.score += 1
 	miss_streak = min (miss_streak + 1, 5)
-	if highscore < score:
-		highscore = score
-		save_data(highscore, 'highscore')
-	$ui/highscore_label.text = highscore_text + str(highscore)
-	$ui/score_label.text = score_text + str(score)
+	if global.highscore < global.score:
+		global.highscore = global.score
+		save_data(global.highscore, 'highscore')
+	$ui/highscore_label.text = highscore_text + str(global.highscore)
+	$ui/score_label.text = score_text + str(global.score)
 	$ui/hearts.rect_size.x = 256 * miss_streak
 
 
@@ -163,4 +161,6 @@ func load_data(file, empty = null, path = "res"):
 
 
 func lose_game():
-	print("YOU LOST NOOB")
+	get_tree().paused = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().change_scene("res://scenes/lose_screen.tscn")

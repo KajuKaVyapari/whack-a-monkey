@@ -1,0 +1,69 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/ui/label_text_template.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/ui/label_template.tres" type="StyleBox" id=2]
+[ext_resource path="res://assets/bg_solo_final.png" type="Texture" id=3]
+[ext_resource path="res://assets/tree_solo_final.png" type="Texture" id=4]
+[ext_resource path="res://assets/monkey-final.png" type="Texture" id=5]
+[ext_resource path="res://assets/ui/replay_icon.png" type="Texture" id=6]
+[ext_resource path="res://scenes/play_button.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scripts/ui.gd" type="Script" id=8]
+[ext_resource path="res://scenes/menu_button.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/exit_button.tscn" type="PackedScene" id=10]
+
+[node name="lose_screen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
+
+[node name="tree" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 4 )
+
+[node name="monkey" type="Sprite" parent="."]
+position = Vector2( 540, 180 )
+scale = Vector2( 0.843924, 0.843924 )
+texture = ExtResource( 5 )
+
+[node name="title" type="Label" parent="."]
+margin_left = 125.4
+margin_top = 385.449
+margin_right = 961.4
+margin_bottom = 643.449
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = ExtResource( 1 )
+text = "You Lost !"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="play_button" parent="." instance=ExtResource( 7 )]
+margin_left = 412.0
+margin_top = 1020.0
+margin_right = 924.0
+margin_bottom = 1532.0
+texture_normal = ExtResource( 6 )
+
+[node name="exit_button" parent="." instance=ExtResource( 10 )]
+margin_left = 412.0
+margin_top = 1620.0
+margin_right = 924.0
+margin_bottom = 2132.0
+
+[node name="menu_button" parent="." instance=ExtResource( 9 )]
+margin_left = 412.0
+margin_top = 1320.0
+margin_right = 924.0
+margin_bottom = 1832.0
+[connection signal="pressed" from="play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="exit_button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="menu_button" to="." method="_on_menu_button_pressed"]
