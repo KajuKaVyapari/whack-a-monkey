@@ -38,8 +38,10 @@ var miss_streak = 5
 
 func _ready():
 	
+	
 	randomize()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	global.score = -1
 	
 	$ui/score_label.text = "Score: "
 	score_text = $ui/score_label.text
@@ -88,6 +90,7 @@ func _on_tween_completed(object, key):
 
 
 func _on_monkey_detector_area_entered(area):
+	$hit_effect.play()
 	area.get_parent().queue_free()
 	increase_score()
 
