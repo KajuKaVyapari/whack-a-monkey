@@ -36,3 +36,7 @@ func _on_play_button_pressed():
 func _ready():
 	if not $play_button == null:
 		$play_button.texture_normal = load("res://assets/ui/play_button.png")
+	if not $score == null:
+		$score.text = "Score: " + str(global.score)
+		$highscore.text = "Highscore: " + str(global.highscore)
+		global.score = -1

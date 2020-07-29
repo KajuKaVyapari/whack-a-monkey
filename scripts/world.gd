@@ -50,20 +50,24 @@ func _ready():
 		global.highscore = (load_data('highscore'))
 	increase_score()
 
-func _physics_process(delta):
-	
-	match state:
-		"move":
-			if Input.is_action_just_pressed("attack"):
-				hammer.get_node("monkey_detector/collider").disabled = false
-				state = "wait"
-				rotate_hammer()
-			hammer.global_position = get_global_mouse_position()
-
 
 func _input(event):
-	if event is InputEventScreenTouch:
-			pass
+	if event is InputEventScreenTouch and state == "move":
+		hammer.global_position = get_global_mouse_position() + Vector2(50, 0)
+		hammer.get_node("monkey_detector/collider").disabled = false
+		state = "wait"
+		rotate_hammer()
+
+
+"""
+This function is only required for PC.
+"""
+#func _physics_process(delta):
+#	if state == "move":
+#		hammer.global_position = get_global_mouse_position() + Vector2(50, 0)
+#		hammer.get_node("monkey_detector/collider").disabled = false
+#		state = "wait"
+#		rotate_hammer()
 
 
 func rotate_hammer():
