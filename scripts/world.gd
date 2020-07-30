@@ -4,7 +4,8 @@ extends Node2D
 onready var monkeys = $monkeys
 onready var hammer = $hammer
 onready var hammer_tween = $hammer/tween
-onready var Monkey = load("res://scenes/monkey.tscn")
+onready var Monkey = preload("res://scenes/monkey.tscn")
+onready var Effect = preload("res://scenes/hit_effect.tscn")
 
 
 var possible_spawns = [
@@ -28,6 +29,7 @@ var possible_spawns = [
 
 var state = "move"
 var monkeys_list = []
+var ignore_list = []
 
 var i = 0
 var score_text
@@ -92,9 +94,17 @@ func _on_tween_completed(object, key):
 
 
 func _on_monkey_detector_area_entered(area):
-	$hit_effect.play()
-	area.get_parent().queue_free()
-	increase_score()
+	if not area in ignore_list:
+		$hit_effect.play()
+		area.get_parent().queue_free()
+		increase_score()
+		
+		# Effect
+		var effect = Effect.instance()
+		effect.global_position = area.global_position
+		effect
+		add_child(effect)
+		ignore_list.push_back(area)
 
 
 func make_point(spawn_point, rot_deg, dir):
@@ -114,11 +124,6 @@ func _on_spawn_timer_timeout():
 func decrease_score():
 		miss_streak -= 1
 		$ui/hearts.rect_size.x = 256 * miss_streak
-		if not global.score <= 0 and not miss_streak <= 0:
-			global.score -= 1
-			$ui/score_label.text = score_text + str(global.score)
-		else:
-			$ui/score_label.text = score_text + str(global.score)
 		if miss_streak <= 0:
 			lose_game()
 
