@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="Whack-A-Monkey"
 run/main_scene="res://scenes/main_menu.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/icon.png"
 
 [autoload]
 

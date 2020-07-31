@@ -61,8 +61,8 @@ func _input(event):
 	if event is InputEventScreenTouch and state == "move":
 		hammer.global_position = get_global_mouse_position() + Vector2(50, 0)
 		hammer.get_node("monkey_detector/collider").disabled = false
-		state = "wait"
 		rotate_hammer()
+		state = "wait"
 
 
 """
@@ -88,8 +88,8 @@ func _on_tween_completed(object, key):
 	else:
 		get_viewport().warp_mouse(hammer.global_position)
 		yield(get_tree(), "idle_frame")
-		state = "move"
 		hammer.get_node("monkey_detector/collider").disabled = true
+		state = "move"
 
 
 
